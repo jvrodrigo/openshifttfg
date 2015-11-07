@@ -1,0 +1,707 @@
+@font-face{
+  font-family:"Futura Bk BT Book";
+  src: url('../file/futura.ttf') format('TrueType');
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	background-color: #444;
+	font-family: Futura Bk BT Book;
+}
+ul{
+	list-style: none;
+}
+li{
+	
+}
+input {
+	font-size:inherit;
+	font-family: Futura Bk BT Book;
+}
+form{
+	background-color: #FFF;
+	padding: 10px;
+	border: 1px solid #666;
+	border-radius: 4px;
+	margin:0px auto;
+}
+table{
+	border: 1px solid #666;
+	border-radius: 4px;
+	margin:0px auto;
+}
+#content{
+	margin: 0px auto;
+	padding: 10px;
+	background: #999;
+	width: 90%;
+}
+#footer {
+	position: absolute;
+	z-index: 100;
+	color: white;
+}
+#alert-message{
+	border: 1px solid #F00;
+	border-radius: 4px;
+	background-color: #DDD;
+	color: #900;
+	margin:10px auto;
+	width: inherit;
+	padding: 10px;
+	text-align: center;
+}
+#calling-on{
+	display: none;
+	text-align: center;
+	background: #AF9;
+	padding: 10px 0px;
+	vertical-align: super;
+}
+#caller{
+	font-weight: bold;
+	font-size: x-large;
+}
+#hang-up{
+
+	text-align:center;
+	padding:0px;
+	background: #F00 url("../images/hangup.png") no-repeat scroll 50% 50% / 90% 90% border-box;
+	border:4px solid white;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+    display: inline-block;
+    margin: 20px;
+}
+#hang-up:HOVER{
+	
+	background-color:#F66;
+	border:8px solid #FFF;
+}
+#lift{
+
+	text-align:center;
+	padding:0px;
+	background: #0C0 url("../images/call.png") no-repeat scroll 50% 50% / 90% 90% border-box;
+	border:4px solid white;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+    display: inline-block;
+    margin: 20px;
+}
+#lift:HOVER{
+	
+	background-color:#6F6;
+	border:8px solid #FFF;
+}
+
+:-webkit-full-screen {
+  /* properties */
+}
+
+:-moz-full-screen {
+  /* properties */
+}
+
+:-ms-fullscreen {
+  /* properties */
+}
+
+:full-screen { /*pre-spec */
+  /* properties */
+}
+
+:fullscreen { /* spec */
+  /* properties */
+}
+
+/* deeper elements */
+:-webkit-full-screen video {
+/*   width: 80%; */
+/*   height: 80%; */
+}
+.users-list-div{
+	margin:0px auto;
+	background: white;
+}
+.users-list-ul{
+	margin: 0px auto;
+	padding: 10px 20px;
+	list-style: none;
+	text-align: center;
+	width: inherit;
+	box-shadow: 2px 0px 5px #888888;
+}
+.users-list-li{
+	margin: 10px auto;
+	padding: 0px;
+	text-align: center;
+	border: 1px solid #666;
+	border-radius: 4px;
+	cursor: pointer;
+	background: white;
+	word-wrap: break-word;
+	box-shadow: 2px 2px 5px #888888;
+	width: 50%;
+	
+}
+#myName{
+	font-weight: bold;
+}
+#myToken{
+	font-weight: bold;
+}
+/* ------------ WEBRTC STYLE -----------------*/
+#card {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#local{
+	height: 100%;
+}
+#localVideo {
+	width: 100% !important;
+	height: auto !important;
+	max-height:100%;
+	max-width: 100%;
+	z-index: 1;
+	object-fit: cover;
+	transform: rotateY(180deg);
+}
+#canvasLocalVideo{
+	display: none;
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display:none;
+}
+#snapShot{
+	
+	height: 10%;
+	transform: rotateY(180deg);
+	position: absolute;
+	z-index: 3;
+	bottom: 10%;
+	left: 10%;
+}
+#remoteVideo {
+	width: 100% !important;
+	height: auto !important;
+	max-height:100%;
+	max-width: 100%;
+	position: relative;
+	z-index: 1;
+	object-fit: cover;
+	transform: rotateY(180deg);
+}
+
+#miniVideo {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	z-index: 2;
+	transform: rotateY(180deg);
+}
+
+#remote {
+	height: 100%;
+}
+
+#mini {
+	position: absolute;
+	width: 80%;
+	bottom: 10%;
+	right: 4%;
+}
+
+#videoConexion {
+	display: none;
+	height: 100%;
+}
+/* Controles de video */
+#videoControls{
+	position: absolute;
+	z-index: 100;
+	float: left;
+	padding: 14px;
+	background: rgba(177, 177, 177, 0.6);
+	border-radius: 4px;
+	cursor: move;
+	top: 250px;
+	left:50px;	
+}
+#videoControls button{
+	margin: 4px;
+}
+#enterFullScreen{
+	display: block;
+	text-align:center;
+	padding:0px;
+	background: #6D9 url("../images/enterfullscreen-white.png") no-repeat scroll 50% 50% / 60% 60% border-box;
+	border:4px solid black;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.1s, background-color 0.1s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#enterFullScreen:HOVER{
+	background-color: #CCC;
+	border:8px solid #FFF;
+
+}
+#exitFullScreen{
+	display: none;
+	text-align:center;
+	padding:0px;
+	background: #CCC url("../images/exitfullscreen-white.png") no-repeat scroll 50% 50% / 60% 60% border-box;
+	border:8px solid #FFF;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.1s, background-color 0.1s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#exitFullScreen:HOVER{
+	background-color: #6D9;
+	border:4px solid #000;
+
+}
+#takePicture{
+	display: block;
+	text-align: center;
+	padding:0px;
+	background: #39A url("../images/camera.png") no-repeat scroll 50% 50% / 60% 60% border-box;
+	border:4px solid #000;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.1s, background-color 0.1s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+	cursor: pointer;
+}
+#takePicture:HOVER{
+	background-color: #CCC;
+	border:8px solid #FFF;
+
+}
+#record{
+	display:block;
+	text-align:center;
+	padding:0px;
+	background-color: #F00;
+	background: #F00 url("../images/circle-white.png") no-repeat scroll 50% 50% / 60% 60% border-box;
+	border:4px solid #000;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#record:HOVER{
+	background-color: #CCC;
+	border:8px solid #FFF;
+}
+
+#stopRecord{
+	display:none;
+	text-align:center;
+	padding: 0px;
+	background: #CCC url("../images/circle-white.png") no-repeat scroll 50% 50% / 60% 60% border-box;
+	border:8px solid #FFF;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#stopRecord:HOVER{
+	background-color: #F00;
+	border:4px solid #000;
+}
+#mute{
+	display:block;
+	text-align:center;
+	padding:0px;
+	background: #EE0 url("../images/speaker-on-white.png") no-repeat scroll 50% 50% / 70% 70% border-box;
+	border:4px solid black;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.1s, background-color 0.1s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#mute:HOVER{
+	
+	background-color:#CCC;
+	border:8px solid #FFF;
+}
+#unMute{
+	display: none;
+	text-align:center;
+	padding:0px;
+	background: #CCC url("../images/altavoz-off.png") no-repeat scroll 50% 50% / 70% 70% border-box;
+	border:8px solid #FFF;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#unMute:HOVER{
+	background-color:#EE0;
+	border:4px solid #000;
+}
+#sendFileOn{
+	display: block;
+	text-align:center;
+	padding:0px;
+	background: #0CC url("../images/send-file.png") no-repeat scroll 50% 50% / 70% 70% border-box;
+	border:4px solid #000;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	-webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#sendFileOn:HOVER{
+	background-color:#CCC;
+	border:8px solid #FFF;
+}
+#sendFileOff{
+	display: none;
+	text-align:center;
+	padding:0px;
+	background: #CCC url("../images/send-file.png") no-repeat scroll 50% 50% / 70% 70% border-box;
+	border:8px solid #FFF;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#sendFile{
+	opacity: 0;
+	cursor: pointer;
+	width: 50px;
+	width: 50px;
+	display: none;
+}
+#cancelFile{
+	display: block;
+	text-align:center;
+	padding:0px;
+	background-color: #A00;
+	color: #FFF;
+	border:2px solid white;
+	border-radius:50%;
+	width:20px;
+	height: 20px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+    vertical-align: top;
+    position: absolute;
+    top: -18px;
+    left: 118px;
+}
+#hangUp{
+	display: none;
+	text-align:center;
+	padding:0px;
+	background: #F00 url("../images/hangup.png") no-repeat scroll 50% 50% / 90% 90% border-box;
+	border:8px solid white;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#hangUp:HOVER{
+	
+	background-color:#777;
+	border:4px solid #F00;
+}
+#reCall{
+	display: none;
+	text-align:center;
+	padding:0px;
+	background: #5E0 url("../images/call.png") no-repeat scroll 50% 50% / 90% 90% border-box;
+	border:4px solid white;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#reCall:HOVER{
+	background-color:#7F0;
+	border:8px solid #000;
+}
+#chatOn{
+	display: block;
+	text-align:center;
+	padding:0px;
+	background: #AAA url("../images/chat-on.png") no-repeat scroll 50% 56% / 50% 50% border-box;
+	border:4px solid #000;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#chatOn:HOVER{
+	background-color: #BBB;
+	border:8px solid #FFF;
+}
+#chatOff{
+	display: none;
+	text-align:center;
+	padding:0px;
+	background: #CCC url("../images/chat-off.png") no-repeat scroll 50% 56% / 50% 50% border-box;
+	border:8px solid white;
+	border-radius:50%;
+	width:50px;
+	height: 50px;
+	 -webkit-transition: border 0.5s, background-color 0.5s; /* Safari */
+    transition: border 0.5s,background-color 0.5s;
+    cursor: pointer;
+}
+#chatOff:HOVER{
+	background-color: #AAA;
+	border:4px solid #000;
+}
+/* Estilo del chat */
+#chat {
+	padding: 0em 1em 7em 1em;
+	position: absolute;
+	z-index: 10;
+	top: 30px;
+	draggable: true;
+	min-width: 165px;
+	min-height: 100px;
+	height:200px;
+	border-radius: 4px;
+	cursor: move;
+	background: #EEE;
+	right:48px;
+}
+#chatControls{
+
+}
+#closeChat{
+	background: url("../images/close.png") no-repeat 50% 50% / 80% 80% border-box;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+	border:0px solid #FFF;
+	padding: 0px;	
+}
+#downOpacity{
+	background: url("../images/down-arrow.png") no-repeat 50% 50% / 80% 80% border-box;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+	border:0px solid #FFF;
+	padding: 0px;
+}
+#upOpacity{
+	background: url("../images/up-arrow.png") no-repeat 50% 50% / 80% 80% border-box;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+	border:0px solid #FFF;
+	padding: 0px;
+}
+#chat h3 {
+	text-align: center;
+	margin: 0;
+	border-radius: 0px 10px 0px 10px;
+	border:0px;
+}
+
+#chatList {
+	background-color: #EEE;
+	overflow: scroll;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	min-height: 100px;
+	word-wrap: break-word;
+	cursor:text;
+	position: relative;
+}
+
+#chatSender {
+	overflow: hidden;
+	border:1px solid grey;
+	padding: 0px;
+	border-radius: 2px;
+}
+
+#chatMessage {
+	position: static;
+	padding: 0.5em 0em 0.5em 0em;
+	width: 100%;
+	border:0px solid black;
+	margin-left: 0em;
+	
+}
+
+#chatMessageSubmit {
+	
+	float: right;
+}
+.chatSend{
+	
+	margin: 4px 0px;
+	display: block;
+	clear: both;
+}
+.chatSendMessage{
+
+	
+	padding: 4px;
+	margin-top: 4px;
+	margin-left: 16px;
+	margin-right: 16px;
+	border-radius: 4px;
+	background-color: #AFF;
+	box-shadow: -4px 4px 4px #888;
+	float: right;
+}
+.chatSendLateral{
+	
+	
+	width: 16px;
+	height: 16px;
+	border-radius: 16px 0px 0px 0px;
+	background-color: #EEE;
+	z-index: 1;
+	position:absolute;
+	margin-top: 10px;
+	right: 0px;
+}
+.chatSendLateralB{
+	
+	
+	width: 16px;
+	height: 16px;
+	margin-top: 4px;
+	position: absolute;
+	background-color: #AFF;
+	margin-top: 8px;
+	border-radius: 2px 0px 0px 0px;
+	right: 0px;
+}
+.chatRecieve{
+	margin: 4px 0px;
+	display: block;
+	clear: both;
+}
+.chatRecieveMessage{
+		padding: 4px;
+	margin-left: 16px;
+	margin-right: 16px;
+	margin-top: 4px;
+	border-radius: 4px;
+	background-color: #FAA;
+	box-shadow: 4px 4px 4px #888;
+	float: left;
+}
+.chatRecieveLateral{
+	width: 16px;
+	height: 16px;
+	border-radius: 0px 16px 0px 0px;
+	background-color: #EEE;
+	z-index: 1;
+	position:absolute;
+	margin-top: 10px;
+}
+.chatRecieveLateralB{
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	background-color: #FAA;
+	margin-top: 8px;
+	border-radius: 2px 0px 0px 0px; 
+}
+/* Progress bar */
+#progressBar{
+	z-index: 10;
+	background-color: #999;
+	border: 2px solid #FFF;
+	width: 120px;
+	height: 16px;
+	display: none;
+	position: absolute;
+	margin-left: 80px;
+	margin-top: -50px;
+	word-wrap: break-word;
+	cursor: auto;
+}
+#progress{
+	background-color: #FFF;
+	border:0px solid #000;
+	width: 0%;
+	height: 12px;
+	z-index: 11;
+	max-width: 116px;
+	margin: 2px;
+}
+#progressPercent{
+	font-size: small;
+	color: #FFF;
+	background-color: #999;
+	margin-top: 8px;
+}
+/* EFETCTO AMBILIGHT */
+.ambilight-left,.ambilight-right {
+	position: absolute;
+	width: 300px;
+	height: 200%;
+	/* opacity: 0; */
+	-webkit-transition: opacity 0.2s linear;
+	-moz-transition: opacity 0.2s linear;
+	-ms-transition: opacity 0.2s linear;
+	-o-transition: opacity 0.2s linear;
+	transition: opacity 0.2s linear;
+}
+
+.ambilight-left {
+	left: -270px;
+	top: -400px;
+}
+
+.ambilight-right {
+	right: -270px;
+	top: -400px;
+}

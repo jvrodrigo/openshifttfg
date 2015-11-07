@@ -1,0 +1,145 @@
+<!-- BEGIN: main -->
+<!DOCTYPE html>
+<html>
+<head>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Bienvenido a la Sala Principal</title>
+</head>
+<body>
+	<div id="content">
+		<h1>Sala Principal</h1>
+		<ul>
+			<li><span id="myName">{myName}</span></li>
+			<li><span id="myToken">{myToken}</span></li>
+		</ul>
+
+		<h2>Estas en la Sala Principal donde puedes contactar con los
+			demas usuarios</h2>
+		<div id="calling-on">
+			Te está llamando:
+			<span id="caller"></span>
+			<button onclick="acceptCall()" id="lift"></button><button onclick="hangUp()" id="hang-up"></button>
+		</div>
+		<div class="users-list-div">{userList}</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var host = "http://{server_name}";
+	var port = 8080;
+	var wsPort = 8000;
+	var myToken = document.getElementById("myToken");
+	console.log(myToken.innerHTML);
+
+	var myName = document.getElementById("myName");
+	console.log(myName.innerHTML);
+
+	function calling(toUser) {
+		console.log("User ->" + toUser.id);
+
+		channel.send('{"type":"calling", "from":"' + myToken.innerHTML
+				+ '", "username":"' + myName.innerHTML + '", "to":"'
+				+ toUser.id + '"}');
+		window.location.assign("webrtc/?r=" + toUser.id + myToken.innerHTML);
+	}
+	function acceptCall() {
+		var url = document.getElementById("caller-url");
+		window.location.assign(url.getAttribute("href"));
+	}
+	function hangUp() {
+		document.getElementById("calling-on").style.display = "none";
+
+	}
+
+	function initialize() {
+		//resetStatus();
+		openChannel();
+	};
+	function openChannel() {
+		console.log("Abriendo el canal.");
+		var location = "ws://{server_name}:" + wsPort;
+		
+		console.log(location);
+		channel = new WebSocket(location);
+		channel.onopen = onChannelOpened;
+
+		channel.onmessage = onChannelMessage;
+		channel.onclose = onChannelClosed;
+		channel.onerror = onChannelError;
+	}
+	function onChannelOpened() {
+		console.log('Conectado a la app');
+		channel.send('{"type":"connect", "username":"' + myName.innerHTML
+				+ '","token":"' + myToken.innerHTML + '"}');
+	}
+	function onChannelMessage(message) {
+
+		console.log('S -> C: ' + message.data);
+		processSignalingMessage(message.data);
+
+	}
+	function onChannelError() {
+
+		console.log('Error del canal');
+	}
+	function onChannelClosed() {
+
+		console.log('Canal cerrado para el usuario');
+		//alert('Canal cerrado para el usuario');
+	}
+
+	var userList = document.getElementById("userList");
+	function processSignalingMessage(message) {
+		//console.log(message);
+
+		if (message) {
+			var msg = JSON.parse(message);
+			//console.log("Processing signaling message:\n Msg type: " + msg.type); 
+			//console.log(msg);
+			if (msg.type == "newuser") {
+				//var msg = JSON.parse(message);
+				//console.log(msg);
+
+				var user = document.createElement("li");
+				user.setAttribute("id", msg.usertoken);
+				user.setAttribute("onclick", "calling(this)");
+				user.setAttribute("class", "users-list-li");
+				user.setAttribute("title", "Pulse para llamar al usuario "
+						+ msg.username);
+				var userToken = document.createTextNode("Usuario: "
+						+ msg.username);
+				var hiperLink = document.createElement("a");
+				hiperLink.setAttribute('href', host + ":" + port
+						+ "/openshifttfg/webrtc/?r=" + msg.usertoken
+						+ myToken.innerHTML);
+				hiperLink.setAttribute('title', "Pulse para llamar al usuario "
+						+ msg.username);
+				hiperLink.appendChild(userToken);
+				user.appendChild(hiperLink);
+
+				userList.appendChild(user);
+			}
+			if (msg.type == "deleteuser") {
+				//console.log(msg.usertoken);
+				//console.log(document.getElementById(msg.usertoken));
+				userList.removeChild(document.getElementById(msg.usertoken));
+
+			}
+			if (msg.type == "calling") {
+				//console.log("Te llama el usuario " +  msg.username);
+				document.getElementById("calling-on").style.display = "block";
+				document.getElementById("caller").innerHTML = '<a id="caller-url" href="webrtc/?r='
+						+ myToken.innerHTML
+						+ ''
+						+ msg.sender
+						+ '">'
+						+ msg.username + '</a>';
+			}
+
+		}
+	}
+
+	initialize();
+</script>
+</html>
+<!-- END: main -->
